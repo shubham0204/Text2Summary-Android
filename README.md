@@ -13,9 +13,9 @@ First, we need to add the JitPack Maven repository to the root-level `build.grad
 ```
 allprojects {
     repositories {
-	    // Other dependencies
-		maven { url 'https://jitpack.io' }
-	}
+        // Other dependencies
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
