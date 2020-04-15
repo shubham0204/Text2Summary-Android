@@ -1,7 +1,7 @@
 
 # Text2Summary API
 
-[![](https://jitpack.io/v/shubham0204/Text2Summary.svg)](https://jitpack.io/#shubham0204/Text2Summary)
+[![](https://jitpack.io/v/shubham0204/Text2Summary-Android.svg)](https://jitpack.io/#shubham0204/Text2Summary-Android)
 
 Text2Summary API uses on-device methods to perform text summarization on Android applications. It uses extractive text summarization 
 methods namely the Weighted Frequencies Algorithm and TF-IDF algorithm.
