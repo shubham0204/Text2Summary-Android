@@ -1,5 +1,8 @@
 import java.lang.Exception
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 // Uses Term Frequency-Inverse Document Frequency ( TF-IDF ) to summarize texts. First, we construct vectorize the sentences,
 // such that each token has its own TF-IDF score. We take the sum of all TF-IDF scores in a sentence. The sentences with

@@ -1,4 +1,5 @@
 
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
@@ -27,9 +28,7 @@ class Tokenizer {
             val text = para.trim()
             var sentences = text.split( "." )
             sentences = sentences.filter { it.trim().isNotEmpty() }
-            sentences = sentences.map {
-                it.replace(Regex( "[0-9]" ) , "")
-            }
+            sentences = sentences.map { it.replace(Regex( "[0-9]" ) , "") }
             sentences = sentences.filter { it.trim().isNotEmpty() }
             return sentences.toTypedArray()
         }
@@ -66,7 +65,10 @@ class Tokenizer {
 
         // Removes \n and \r from the given String.
         fun removeLineBreaks( para : String ) : String {
-            return para.replace("\n", " ").replace("\r", " ")
+            return para
+                    .replace("\n", "" )
+                    .replace("\r", "" )
+
         }
 
         // Checks if the compression rate lie in ( 0 , 1 ].
@@ -82,7 +84,7 @@ class Tokenizer {
                 topNIndices.add( x.indexOf( i ) )
             }
             topNIndices.sort()
-            return topNIndices.toTypedArray()
+            return topNIndices.distinct().toTypedArray()
         }
 
     }

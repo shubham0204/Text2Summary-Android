@@ -4,7 +4,7 @@
 [![](https://jitpack.io/v/shubham0204/Text2Summary-Android.svg)](https://jitpack.io/#shubham0204/Text2Summary-Android)
 
 Text2Summary API uses on-device methods to perform text summarization on Android applications. It uses extractive text summarization 
-methods namely the Weighted Frequencies Algorithm and TF-IDF algorithm.
+to give you the most sentences from a given text.
 
 * [Installation](#installation)
 * [Usage](#usage)
@@ -40,14 +40,14 @@ use `Text2Summary.summarize()` method to generate the summary.
 
 ```kotlin
 
-// Use TF-IDF for summarization
-var summary = Text2Summary.summarize( someLongText , compressionRate = 0.7 , Text2Summary.SUMMARIZATION_ALGO_TFIDF )
-// Or use weighted frequencies
-var summary = Text2Summary.summarize( someLongText , compressionRate = 0.7 , Text2Summary.SUMMARIZATION_ALGO_WEIGHTED_FREQ )
+var summary = Text2Summary.summarize( someLongText , compressionRate = 0.7 )
 
 ```
 The number `0.7` is referred as the compression factor. Meaning, given a text of 10 sentences, a summary of 7 sentences will be
 produced. This number must lie in the interval `( 0 , 1 ]`.
+
+> Note: Sometimes the summary generated may have lesser number of sentences considering the compression rate. If two or more
+sentences seem to contribute equal importance to the text, any one of them is selected.
 
 You may extract text from a file and then pass it to Text2Summary,
 
@@ -55,7 +55,7 @@ You may extract text from a file and then pass it to Text2Summary,
 
 val bufferedReader: BufferedReader = File( "poems.txt" ).bufferedReader()
 val text = bufferedReader.use{ it.readText() }
-val summary = Text2Summary.summarize( text , 0.7 , Text2Summary.SUMMARIZATION_ALGO_WEIGHTED_FREQ )
+val summary = Text2Summary.summarize( text , 0.7 )
 
 ```
 
@@ -73,8 +73,7 @@ fun run ( ) {
 class SummaryTask : AsyncTask< String , Void , String >() {
 
     override fun doInBackground(vararg params: String?): String {
-        val summary = Text2Summary.summarize( params[0]!! , 0.7f ,
-            Text2Summary.SUMMARIZATION_ALGO_TFIDF )
+        val summary = Text2Summary.summarize( params[0]!! , 0.7f )
         return summary
     }
 
@@ -88,13 +87,13 @@ class SummaryTask : AsyncTask< String , Void , String >() {
 
 ## More on Text2Summary
 
-Text2Summary uses two algorithms for extractive text summarization. Note, this is not abstractive text summarization which
+Text2Summary uses the TF-IDF for extractive text summarization. Note, this is not abstractive text summarization which
 use neural networks like the Seq2Seq model. As TensorFlow Lite does not support fully the conversion of `Embedding` and `LSTM`
-layers, we need to use the above mentioned algorithms. Both algorithms follow a similar pathway for generating summaries,
+layers, we need to use the above mentioned algorithms.
 
 1. The `text` which is given to `TextSummary.summarize()` is broken down into sentences. These sentences are further brought down
 to words ( tokens ).
-2. Using any of the algorithms as given in the `summarizationMode=` argument, a score is calculated for each word.
+2. Using TF-IDF algorithm, a TF-IDF score is calculated for each word.
 3. Next, we take the sum of such scores for all words present in the sentence.
 4. Finally, we take the top N highest scores. The corresponding sentences hold most of the information present in the text. These
 sentences are then concatenated and returned as the summary.
