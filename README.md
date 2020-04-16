@@ -1,6 +1,8 @@
 
 # Text2Summary API
 
+![](text2summary_banner.png)
+
 [![](https://jitpack.io/v/shubham0204/Text2Summary-Android.svg)](https://jitpack.io/#shubham0204/Text2Summary-Android)
 
 Text2Summary API uses on-device methods to perform text summarization on Android applications. It uses extractive text summarization 
