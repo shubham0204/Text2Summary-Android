@@ -8,6 +8,8 @@
 Text2Summary API uses on-device methods to perform text summarization on Android applications. It uses extractive text summarization 
 to give you the most sentences from a given text.
 
+You may [read the story of Text2Summary on Medium](https://medium.com/@equipintelligence/introducing-text2summary-text-summarization-on-android-674b62419019).
+
 * [Installation](#installation)
 * [Usage](#usage)
 * [More on Text2Summary](#more-on-text2summary)
