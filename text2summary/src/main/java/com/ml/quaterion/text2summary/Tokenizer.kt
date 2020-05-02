@@ -1,10 +1,10 @@
-
 import java.util.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-// Helper class which transforms texts to tokens, builds ( word , frequency )  HashMaps. The static methods of
-// this class are used in WeightedFrequencySummarizer.java and TFIDFSummarizer.java
+// Helper class which transforms texts to tokens, builds ( word , frequency )  HashMaps.
 class Tokenizer {
 
     companion object {
@@ -26,10 +26,13 @@ class Tokenizer {
         // Returns a list of sentences from the given paragraph.
         fun paragraphToSentence( para : String ) : Array<String> {
             val text = para.trim()
-            var sentences = text.split( "." )
-            sentences = sentences.filter { it.trim().isNotEmpty() }
-            sentences = sentences.map { it.replace(Regex( "[0-9]" ) , "") }
-            sentences = sentences.filter { it.trim().isNotEmpty() }
+            val pattern = Pattern.compile("[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)",
+                    Pattern.MULTILINE or Pattern.COMMENTS)
+            val matcher = pattern.matcher( text )
+            val sentences = ArrayList<String>()
+            while( matcher.find() ) {
+                sentences.add( matcher.group() )
+            }
             return sentences.toTypedArray()
         }
 
@@ -39,7 +42,7 @@ class Tokenizer {
             var tokens = sentence.split( " " )
             tokens = tokens.map { Regex("[^A-Za-z0-9 ]").replace( it , "") }
             tokens = tokens.filter { !englishStopWords.contains( it.trim() ) }
-            tokens = tokens.filter { it.trim().isNotEmpty() }
+            tokens = tokens.filter { it.trim().isNotEmpty() and it.trim().isNotBlank() }
             return tokens.toTypedArray()
         }
 
@@ -66,9 +69,8 @@ class Tokenizer {
         // Removes \n and \r from the given String.
         fun removeLineBreaks( para : String ) : String {
             return para
-                    .replace("\n", "" )
-                    .replace("\r", "" )
-
+                    .replace("\n", " " )
+                    .replace("\r", " " )
         }
 
         // Checks if the compression rate lie in ( 0 , 1 ].

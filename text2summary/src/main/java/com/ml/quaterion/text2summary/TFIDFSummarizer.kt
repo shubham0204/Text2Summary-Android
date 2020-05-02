@@ -4,7 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-// Uses Term Frequency-Inverse Document Frequency ( TF-IDF ) to summarize texts. First, we construct vectorize the sentences,
+// Uses Term Frequency-Inverse Document Frequency ( TF-IDF ) to summarize texts. First, we vectorize the sentences,
 // such that each token has its own TF-IDF score. We take the sum of all TF-IDF scores in a sentence. The sentences with
 // top N highest sums are included in the summary.
 class TFIDFSummarizer {

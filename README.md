@@ -61,31 +61,21 @@ val summary = Text2Summary.summarize( text , 0.7 )
 
 ```
 
-### Using `AsyncTask` for huge texts
+### Using Text2Summary for huge texts
 
-As heavy operations are performed for the summarization, a huge text given to Text2Summary may block the `Activity` UI thread. To
-counter this, use `AsyncTask` with Text2Summary,
+As heavy operations are performed for the summarization, a huge text given to Text2Summary may block the `Activity` UI thread.  
+To counter this, use `Text2Summary.summarizeAsync()`,
 
 ```kotlin
-
-fun run ( ) {
-    SummaryTask().execute( someVeryLongText )
-}
-
-class SummaryTask : AsyncTask< String , Void , String >() {
-
-    override fun doInBackground(vararg params: String?): String {
-        val summary = Text2Summary.summarize( params[0]!! , 0.7f )
-        return summary
+val callback = object : Text2Summary.SummaryCallback {
+    override fun onSummaryProduced(summary: String) {
+        // The summary is ready!
     }
-
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
-        // Use the summary here
-    }
-
 }
+Text2Summary.summarizeAsync( someLongText , 0.7f , callback  )
 ```
+
+The `summarizeAsync()` method internally calls the `summarize()` method itself wrapped in a `AsyncTask`.
 
 ## More on Text2Summary
 
