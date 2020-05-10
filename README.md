@@ -50,9 +50,6 @@ var summary = Text2Summary.summarize( someLongText , compressionRate = 0.7 )
 The number `0.7` is referred as the compression factor. Meaning, given a text of 10 sentences, a summary of 7 sentences will be
 produced. This number must lie in the interval `( 0 , 1 ]`.
 
-> Note: Sometimes the summary generated may have lesser number of sentences considering the compression rate. If two or more
-sentences seem to contribute equal importance to the text, any one of them is selected.
-
 You may extract text from a file and then pass it to Text2Summary,
 
 ```kotlin
