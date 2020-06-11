@@ -33,7 +33,7 @@ Then in the module-level `build.gradle` file, add the Text2Summary dependency,
 ```
 dependencies {
     // Other dependencies
-    implementation 'com.github.shubham0204:Text2Summary-Android:alpha-02'
+    implementation 'com.github.shubham0204:Text2Summary-Android:alpha-04'
 }
 ```
 
