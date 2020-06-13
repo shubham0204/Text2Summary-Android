@@ -1,15 +1,17 @@
+package com.ml.quaterion.text2summary
+
 import android.os.AsyncTask
 import java.lang.StringBuilder
 
 // The Text2Summary API for Android.
-class Text2Summary() {
+public class Text2Summary() {
 
     companion object {
 
         // Summarizes the given text.
         @JvmStatic
         fun summarize( text : String , compressionRate : Float ): String {
-            val sentences = Tokenizer.paragraphToSentence( Tokenizer.removeLineBreaks( text ) )
+            val sentences = Tokenizer.paragraphToSentence(Tokenizer.removeLineBreaks(text))
             val tfidfSummarizer = TFIDFSummarizer()
             val p1 = tfidfSummarizer.compute( text , compressionRate )
             return buildString( sentences , p1 )
@@ -19,16 +21,16 @@ class Text2Summary() {
         // It performs the summarization on the background thread. Once the process is complete the summary is
         // passed to the SummaryCallback.onSummaryProduced callback.
         @JvmStatic
-        fun summarizeAsync( text : String , compressionRate : Float , callback : SummaryCallback ) {
+        fun summarizeAsync( text : String , compressionRate : Float , callback : SummaryCallback) {
             SummaryTask( text , compressionRate , callback ).execute()
         }
 
         // The AsyncTask which will be used for processing texts on the background thread.
-        private class SummaryTask( var text : String , var rate : Float , var callback: SummaryCallback )
+        private class SummaryTask( var text : String , var rate : Float , var callback: SummaryCallback)
             : AsyncTask<Void , Void , String>() {
 
             override fun doInBackground(vararg params: Void?): String {
-                val sentences = Tokenizer.paragraphToSentence( Tokenizer.removeLineBreaks( text ) )
+                val sentences = Tokenizer.paragraphToSentence(Tokenizer.removeLineBreaks(text))
                 val tfidfSummarizer = TFIDFSummarizer()
                 val p1 = tfidfSummarizer.compute( text , rate )
                 val stringBuilder = StringBuilder()

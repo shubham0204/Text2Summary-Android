@@ -78,9 +78,9 @@ The `summarizeAsync()` method internally calls the `summarize()` method itself w
 
 ## More on Text2Summary
 
-Text2Summary uses the TF-IDF for extractive text summarization. Note, this is not abstractive text summarization which
+Text2Summary uses the TF-IDF algorithm for extractive text summarization. Note, this is not abstractive text summarization which
 use neural networks like the Seq2Seq model. As TensorFlow Lite does not support fully the conversion of `Embedding` and `LSTM`
-layers, we need to use the above mentioned algorithms.
+layers, we need to use the TF-IDF algorithm.
 
 1. The `text` which is given to `TextSummary.summarize()` is broken down into sentences. These sentences are further brought down
 to words ( tokens ).

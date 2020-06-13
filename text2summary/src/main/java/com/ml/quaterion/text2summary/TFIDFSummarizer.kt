@@ -1,6 +1,6 @@
+package com.ml.quaterion.text2summary
+
 import java.lang.Exception
-import java.lang.StringBuilder
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
