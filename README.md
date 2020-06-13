@@ -15,6 +15,8 @@ You may [read the story of Text2Summary on Medium](https://medium.com/@equipinte
 * [More on Text2Summary](#more-on-text2summary)
 * [Contribute](#contribute)
 
+> Please note that this library is in development. So, it will be prone to frequent changes. Developers are welcomed to open issues and share their feedback.
+
 ## Installation
 
 First, we need to add the JitPack Maven repository to the root-level `build.gradle` file,
@@ -33,9 +35,11 @@ Then in the module-level `build.gradle` file, add the Text2Summary dependency,
 ```
 dependencies {
     // Other dependencies
-    implementation 'com.github.shubham0204:Text2Summary-Android:alpha-04'
+    implementation 'com.github.shubham0204:Text2Summary-Android:alpha-05'
 }
 ```
+
+For the latest build, see [Releases](https://github.com/shubham0204/Text2Summary-Android/releases).
 
 ## Usage
 
