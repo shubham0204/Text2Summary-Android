@@ -7,6 +7,7 @@ class Text2Summary() {
     companion object {
 
         // Summarizes the given text.
+        @JvmStatic
         fun summarize( text : String , compressionRate : Float ): String {
             val sentences = Tokenizer.paragraphToSentence( Tokenizer.removeLineBreaks( text ) )
             val tfidfSummarizer = TFIDFSummarizer()
@@ -17,6 +18,7 @@ class Text2Summary() {
         // Summarizes the given text. Note, this method should be used whe you're dealing with long texts.
         // It performs the summarization on the background thread. Once the process is complete the summary is
         // passed to the SummaryCallback.onSummaryProduced callback.
+        @JvmStatic
         fun summarizeAsync( text : String , compressionRate : Float , callback : SummaryCallback ) {
             SummaryTask( text , compressionRate , callback ).execute()
         }
