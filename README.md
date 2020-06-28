@@ -5,6 +5,8 @@
 
 [![](https://jitpack.io/v/shubham0204/Text2Summary-Android.svg)](https://jitpack.io/#shubham0204/Text2Summary-Android)
 
+[![forthebadge](https://forthebadge.com/images/badges/built-for-android.svg)](https://forthebadge.com)
+
 Text2Summary API uses on-device methods to perform text summarization on Android applications. It uses extractive text summarization 
 to give you the most important sentences from a given text.
 
