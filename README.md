@@ -95,6 +95,10 @@ to words ( tokens ).
 4. Finally, we take the top N highest scores. The corresponding sentences hold most of the information present in the text. These
 sentences are then concatenated and returned as the summary.
 
+### Updates
+
+With [TensorFlow 2.3](https://www.tensorflow.org/api_docs/python/tf?version=nightly), some `LSTM` and `Embedding` ops are now supported with TensorFlow Lite. But I'll stick to TF-IDF as it is faster and efficient for Android.
+
 ## Contribute
 
 If you are facing any issues, [open an issue](https://github.com/shubham0204/Text2Summary/issues) on the repository. You may
