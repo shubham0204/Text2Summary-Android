@@ -1,13 +1,10 @@
 use std::collections::HashMap;
-use regex::Regex;
 
 pub struct Tokenizer {}
 
 impl Tokenizer {
 
     pub fn text_to_sentences( text: &str ) -> Vec<&str> {
-        let sentence_regex = Regex::new( r"(?:\.|\?|!)(?: \n?)?" ).expect( "Could not parse sentence regex." ) ; 
-        sentence_regex.replace_all( &text , "$@$" ) ; 
         let sentences: Vec<&str> = text.split( "." ).collect() ; 
         sentences
     }

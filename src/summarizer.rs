@@ -9,7 +9,6 @@ impl Summarizer {
         reduction_factor: f32
      ) -> String {
         let mut sentences: Vec<&str> = Tokenizer::text_to_sentences( text ) ; 
-        println!( "{:?}" , sentences ) ; 
         let mut tokens: Vec<Vec<&str>> = Vec::new() ; 
         for sentence in sentences.iter() {
             tokens.push( Tokenizer::sentence_to_tokens(sentence) ) 
@@ -25,7 +24,6 @@ impl Summarizer {
             for word in tokenized_sentence.iter() {
                 tfidf_sum += tf.get( word ).unwrap() * idf.get( word ).unwrap() ; 
             }
-            println!( "{}" , tfidf_sum ) ; 
             sentence_scores.insert( sentences[i] , tfidf_sum ) ; 
             i += 1
         }
@@ -37,13 +35,11 @@ impl Summarizer {
         let summary = sentences[ 0..num_summary_sents ].join( ". " ) ;
 
         summary
-
     }
 
     fn compute_term_frequency<'a>(
         tokenized_sentence: &'a Vec<&str>
     ) -> HashMap<&'a str,f32> {
-
         let words_frequencies = Tokenizer::get_freq_map( tokenized_sentence ) ;
         let mut term_frequency: HashMap<&str,f32> = HashMap::new() ;  
         let num_tokens = tokenized_sentence.len() ; 
