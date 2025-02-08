@@ -1,5 +1,5 @@
 
-# Text2Summary API
+# Text2Summary - Text Summarization with TFIDF in Kotlin
 
 ![](text2summary_banner.png)
 
@@ -17,44 +17,26 @@ You may [read the story of Text2Summary on Medium](https://medium.com/@equipinte
 * [More on Text2Summary](#more-on-text2summary)
 * [Contribute](#contribute)
 
-> Please note that this library is in development. So, it will be prone to frequent changes. Developers are welcomed to open issues and share their feedback.
 
 ## Installation
 
-First, we need to add the JitPack Maven repository to the root-level `build.gradle` file,
-
-```
-allprojects {
-    repositories {
-        // Other dependencies
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-
-Then in the module-level `build.gradle` file, add the Text2Summary dependency,
-
-```
-dependencies {
-    // Other dependencies
-    implementation 'com.github.shubham0204:Text2Summary-Android:alpha-05'
-}
-```
-
-For the latest build, see [Releases](https://github.com/shubham0204/Text2Summary-Android/releases).
+For the latest fat JAR, see [Releases](https://github.com/shubham0204/Text2Summary-Android/releases).
 
 ## Usage
 
 The text which needs to be summarized has to be a `String` object. Then,
 use `Text2Summary.summarize()` method to generate the summary.
 
+`Text2Summary.summarize()` is a suspend function and hence it should be called within a `CoroutineContext`.
+
 ```kotlin
 
-var summary = Text2Summary.summarize( someLongText , compressionRate = 0.7 )
-
+runBlocking {
+    var summary = Text2Summary.summarize(someLongText, compressionRate = 0.7)
+}
 ```
 The number `0.7` is referred as the compression factor. Meaning, given a text of 10 sentences, a summary of 7 sentences will be
-produced. This number must lie in the interval `( 0 , 1 ]`.
+produced. This number must lie in the interval `( 0 , 1 )`.
 
 You may extract text from a file and then pass it to Text2Summary,
 
@@ -64,20 +46,6 @@ val bufferedReader: BufferedReader = File( "poems.txt" ).bufferedReader()
 val text = bufferedReader.use{ it.readText() }
 val summary = Text2Summary.summarize( text , 0.7 )
 
-```
-
-### Using Text2Summary for huge texts
-
-As heavy operations are performed for the summarization, a huge text given to Text2Summary may block the `Activity` UI thread.  
-To counter this, use `Text2Summary.summarizeAsync()`,
-
-```kotlin
-val callback = object : Text2Summary.SummaryCallback {
-    override fun onSummaryProduced(summary: String) {
-        // The summary is ready!
-    }
-}
-Text2Summary.summarizeAsync( someLongText , 0.7f , callback  )
 ```
 
 The `summarizeAsync()` method internally calls the `summarize()` method itself wrapped in a `AsyncTask`.
@@ -95,14 +63,9 @@ to words ( tokens ).
 4. Finally, we take the top N highest scores. The corresponding sentences hold most of the information present in the text. These
 sentences are then concatenated and returned as the summary.
 
-### Updates
-
-With [TensorFlow 2.3](https://www.tensorflow.org/api_docs/python/tf?version=nightly), some `LSTM` and `Embedding` ops are now supported with TensorFlow Lite. But I'll stick to TF-IDF as it is faster and efficient for Android.
-
 ## Contribute
 
-If you are facing any issues, [open an issue](https://github.com/shubham0204/Text2Summary/issues) on the repository. You may
-send your suggestion at equipintelligence@gmail.com.
+If you are facing any issues, [open an issue](https://github.com/shubham0204/Text2Summary/issues) on the repository.
 
 
 

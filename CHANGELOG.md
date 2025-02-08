@@ -1,0 +1,1 @@
+Initial release of `Text2Summary-Android`
